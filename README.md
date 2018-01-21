@@ -18,9 +18,8 @@ and protocol mismatches.
 
 ## Usage
 
-(require '[find-aot-deps.core :as fad])
-
 ```clojure
+(require '[find-aot-deps.core :as fad])
 (fad/aot-clj? "~/.m2/repository/foo/bar/bar-1.0.0.jar")
 ```
 
