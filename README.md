@@ -3,10 +3,10 @@
 A Clojure library to identify .jars containing transitive AOT dependencies.
 
 Q: What does that mean?
-A: When you AOT a namespace, all functions in the namespace are compiled, _as well as all of the namespaces dependencies_.
+A: When you AOT a namespace, all functions in the namespace are compiled, _as well as all of the namespace's dependencies_.
 
 Q: So?
-A: This can cause problems in dependency management, . Consider:
+A: This can cause problems in dependency management, when you AOT code that isn't a part of your library. Consider:
 
 You depend on version 1.0.0 of library A, and 1.0.0 of library
 B. Library B depends on 0.9.0 of library A, and AOTs a namespace that
@@ -15,6 +15,10 @@ code plus your dependencies, it will contain the .clj source files for
 1.0.0 of library A, and _as well as the AOT'd class files for
 0.9.0_. That can break your app in nasty ways, because of interface
 and protocol mismatches.
+
+tl;dr if you AOT a library that isn't yours, and that code makes it
+into your jars, that breaks dependency management for downstream
+consumers of your library. This helps you find those situations.
 
 ## Usage
 
